@@ -31,9 +31,9 @@ class HandleNotFound
             $uri = $request->getRequestUri();
 
             // Remove site URI
-            $siteUri = Str::after($site->url(), '/');
+            $siteUri = parse_url($site->url(), PHP_URL_PATH);
             if (! empty($siteUri) && str_contains($uri, $siteUri)) {
-                $uri = Str::after($uri, $site->url());
+                $uri = Str::after($uri, $siteUri);
             }
             // Make sure it starts with '/'
             $uri = Str::start($uri, '/');
